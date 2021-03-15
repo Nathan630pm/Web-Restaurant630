@@ -170,6 +170,7 @@ $(document).ready(function() {
         message = "(Order is under $80: 5% off!)"
       }
       $('#cartDiscount').html("" + formatter.format(discounts) + " " + message);
+      $('#cartTax').html(formatter.format(total * 0.13));
       $('#cartTotal').html(formatter.format(total));
       $('#cartTotalTax').html(formatter.format(total * 1.13));
 
