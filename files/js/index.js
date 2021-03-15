@@ -90,6 +90,80 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   var menu;
+  var userCart = [];
+
+  function pushToScreen() {
+    var i;
+    var item = [];
+    for (i = 0; i < menu.length; i++) {
+
+      item.push('<div class="item">');
+      item.push('<div class="itemMainTitle">')
+      item.push('<div class = "itemTitle"> ' + menu[i].Title + ' </div>');
+      item.push('</div>')
+      item.push('<div class="itemContent">');
+      item.push('<div class = "itemImage">' + '<img src = "' + menu[i].Image + '"/>' + '</div>');
+      item.push('<div class = "itemPrice">$' + menu[i].Price + '</div>');
+      item.push('<div class = "itemDesc">' + menu[i].Description + '</div>');
+      item.push('<div class = "itemRating">Rating: ' + menu[i].Ratings + '/5</div>');
+      item.push('<div class = "itemAvail">Availablility: ' + menu[i].Available + '</div>');
+      item.push('<div class = "itemCategory">Category: ' + menu[i].Category + '</div>');
+      item.push('</div>');
+      item.push('<div class="itemButton">')
+      item.push('<button type="button" class="orderButton" id="' + menu[i].Id + '" name="button">Add To Cart</button>')
+      item.push('</div>')
+      item.push('</div>');
+
+    }
+
+    $('#menu').html("");
+    $("#menu").append(item.join(''));
+  }
+
+
+  if ('user-cart' in localStorage) {
+    var incomingData = localStorage.getItem("user-cart");
+
+    userCart = JSON.parse(incomingData);
+  } else {
+    localStorage.setItem("user-cart", JSON.stringify(userCart));
+  }
+
+  var k;
+  var totalCartItems = 0;
+  for (k = 0; k < userCart.length; k++) {
+    totalCartItems = totalCartItems + userCart[k].amount;
+  }
+  $("#cartTab").html("(" + totalCartItems + ")");
+
+
+  // using document, because order buttons are added after page has loaded.
+  $(document).on('click', '.orderButton', function() {
+    var id = this.id;
+    console.log(id);
+    var cartItem = {
+      id: this.id,
+      amount: 1
+    };
+    var foundItem = false;
+    var j;
+    for (j = 0; j < userCart.length; j++) {
+      if (userCart[j].id == id) {
+        userCart[j].amount = userCart[j].amount + 1
+        cartItem = cartItem[j];
+        foundItem = true;
+      }
+    }
+    if (foundItem != true) {
+      userCart.push(cartItem);
+    }
+    totalCartItems++;
+    $("#cartTab").html("(" + totalCartItems + ")");
+    localStorage.setItem("user-cart", JSON.stringify(userCart));
+  });
+
+
+
 
   $.getJSON('https://gist.githubusercontent.com/skd09/8d8a685ffbdae387ebe041f28384c13c/raw/26e97cec1e18243e3d88c90d78d2886535a4b3a6/menu.json', function(data) {
     // JSON result in `data` variable
@@ -229,33 +303,9 @@ $(document).ready(function() {
   });
 
 
-  function pushToScreen() {
-    var i;
-    var item = [];
-    for (i = 0; i < menu.length; i++) {
 
-      item.push('<div class="item">');
-      item.push('<div class="itemMainTitle">')
-      item.push('<div class = "itemTitle"> ' + menu[i].Title + ' </div>');
-      item.push('</div>')
-      item.push('<div class="itemContent">');
-      item.push('<div class = "itemImage">' + '<img src = "' + menu[i].Image + '"/>' + '</div>');
-      item.push('<div class = "itemPrice">$' + menu[i].Price + '</div>');
-      item.push('<div class = "itemDesc">' + menu[i].Description + '</div>');
-      item.push('<div class = "itemRating">Rating: ' + menu[i].Ratings + '/5</div>');
-      item.push('<div class = "itemAvail">Availablility: ' + menu[i].Available + '</div>');
-      item.push('<div class = "itemCategory">Category: ' + menu[i].Category + '</div>');
-      item.push('</div>');
-      item.push('<div class="itemButton">')
-      item.push('<button type="button" class="orderButton" id="' + menu[i].Id + '" name="button">Add To Cart</button>')
-      item.push('</div>')
-      item.push('</div>');
 
-    }
 
-    $('#menu').html("");
-    $("#menu").append(item.join(''));
-  }
 
 
 })
