@@ -27,8 +27,10 @@
       <div id="mobileNavcrollShadow"><a id="navLogo" href="/"><img class="navLogo" alt="Nathan630pm Logo" src="https://Nathan630pm.com/beta/assets/nav/nathan630pm-nav-logo.png"></a></div>
       <div class="mobileNavScroll" id="mobileNavScroll">
         <a href="cart.html" onclick="toggleMenu()">Cart <span id="cartTab"></span></a>
-        <a href="index.html" onclick="toggleMenu()">Home</a>
         <a style="display: none;" href="logout.html" onclick="toggleMenu()">Logout</a>
+        <a style="display: block;" href="logout.html" onclick="toggleMenu()">Login</a>
+        <a href="index.html" onclick="toggleMenu()">Menu</a>
+
         <a id="scrollHelper" href="javascript:void(0);" onclick="toggleMenu()"></a>
       </div>
       <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
@@ -46,7 +48,7 @@
 
   <div class="pageContent">
     <h1>Your Cart</h1>
-    <div class="sorting">
+    <div id="sortingArea" class="sorting">
       <h3>Sort by:</h3>
       <button type="button" id="low-high" name="button">Price Low-High</button>
       <button type="button" id="high-low" name="button">Price High-Low</button>
@@ -69,7 +71,7 @@
     </div>
 
     <div style="display: none;" id="no-items">
-      <h3>Your cart is empty!</h3>
+      <h3>Your cart is empty! Head over to <a href="index.html">our menu</a> to add things to your cart!</h3>
     </div>
 
   </div>

@@ -189,6 +189,7 @@ $(document).ready(function() {
 
     if (cartMenu.length == 0) {
       $('#totals').hide();
+      $('#sortingArea').hide();
       $('#no-items').show();
     }
 
@@ -290,6 +291,126 @@ $(document).ready(function() {
     $("#cartTab").html("(" + totalCartItems + ")");
     localStorage.setItem("user-cart", JSON.stringify(userCart));
     reloadScreen();
+  });
+
+
+
+  $('#low-high').on('click', function() {
+
+    if (cartMenu == null) {
+      alert("an error occurred.")
+    } else {
+      cartMenu.sort(function(a, b) {
+        return a.Price - b.Price
+      })
+
+
+
+      pushToScreen();
+
+
+
+    }
+
+  });
+
+  $('#high-low').on('click', function() {
+
+    if (cartMenu == null) {
+      alert("an error occurred.")
+    } else {
+      cartMenu.sort(function(a, b) {
+        return b.Price - a.Price
+      })
+
+
+      pushToScreen();
+
+
+
+    }
+
+  });
+
+  $('#ava-low-high').on('click', function() {
+
+    if (cartMenu == null) {
+      alert("an error occurred.")
+    } else {
+      cartMenu.sort(function(a, b) {
+        return a.Available - b.Available
+      })
+
+
+
+      pushToScreen();
+
+
+    }
+
+  });
+
+
+  $('#ava-high-low').on('click', function() {
+
+    if (cartMenu == null) {
+      alert("an error occurred.")
+    } else {
+      cartMenu.sort(function(a, b) {
+        return b.Available - a.Available
+      })
+
+
+      pushToScreen();
+
+    }
+
+  });
+
+
+  $('#A-Z').on('click', function() {
+
+    if (cartMenu == null) {
+      alert("an error occurred.")
+    } else {
+      cartMenu.sort(function(a, b) {
+        var nameA = a.Title.toLowerCase()
+        var nameB = b.Title.toLowerCase()
+        if (nameA < nameB) //sort string ascending
+          return -1
+        if (nameA > nameB)
+          return 1
+        return 0 //default return value (no sorting)
+      })
+
+
+      pushToScreen();
+
+
+    }
+
+  });
+
+
+  $('#Z-A').on('click', function() {
+
+    if (cartMenu == null) {
+      alert("an error occurred.")
+    } else {
+      cartMenu.sort(function(a, b) {
+        var nameA = a.Title.toLowerCase()
+        var nameB = b.Title.toLowerCase()
+        if (nameA < nameB) //sort string ascending
+          return 1
+        if (nameA > nameB)
+          return -1
+        return 0 //default return value (no sorting)
+      })
+
+      pushToScreen();
+
+    }
+
   });
 
 
