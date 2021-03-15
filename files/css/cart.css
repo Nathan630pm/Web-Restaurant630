@@ -7,3 +7,24 @@
 #no-items {
   padding-top: 50px;
 }
+
+
+.itemButtons {
+  height: 50px;
+}
+.itemButtons button {
+  width: 25%;
+  transition: 0.3s;
+  margin: 10px;
+  padding: 7px;
+  background-color: orange;
+  color: white;
+  border-radius: 10px;
+  border: 0px solid;
+}
+
+.itemButtons button:hover {
+  background-color: darkorange;
+  transform: scale(1.02, 1.02);
+  width: 30%;
+}

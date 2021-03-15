@@ -90,6 +90,8 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 
+  refreshData();
+
 
   // formatting for $$
   var formatter = new Intl.NumberFormat('en-US', {
@@ -122,74 +124,81 @@ $(document).ready(function() {
   }
   $("#cartTab").html("(" + totalCartItems + ")");
 
-  $.getJSON('https://gist.githubusercontent.com/skd09/8d8a685ffbdae387ebe041f28384c13c/raw/26e97cec1e18243e3d88c90d78d2886535a4b3a6/menu.json', function(data) {
-    // JSON result in `data` variable
-    menu = data;
-    console.log(menu);
-    if (menu == null) {
-      alert("an error occurred.")
-    } else {
+  function refreshData() {
+    $.getJSON('https://gist.githubusercontent.com/skd09/8d8a685ffbdae387ebe041f28384c13c/raw/26e97cec1e18243e3d88c90d78d2886535a4b3a6/menu.json', function(data) {
+      // JSON result in `data` variable
+      menu = data;
+      console.log(menu);
+      if (menu == null) {
+        alert("an error occurred.")
+      } else {
 
-      var j;
-      console.log(userCart);
-      for (j = 0; j < menu.length; j++) {
-        var k;
-        for (k = 0; k < userCart.length; k++) {
-          if (userCart[k].id == menu[j].Id.toString()) {
-            console.log("found something at pos: " + j);
-            cartMenu.push(menu[j]);
-            amounts.push(userCart[k].amount)
-          }
+        reloadScreen();
+
+      }
+    });
+  }
+
+  function reloadScreen() {
+    cartMenu = [];
+    amounts = [];
+    var j;
+    console.log("user cart on reload");
+    console.log(userCart);
+    for (j = 0; j < menu.length; j++) {
+      var k;
+      for (k = 0; k < userCart.length; k++) {
+        if (userCart[k].id == menu[j].Id.toString()) {
+          console.log("found something at pos: " + j);
+          cartMenu.push(menu[j]);
+          amounts.push(userCart[k].amount)
         }
-
-
-
       }
-      var subtotal = 0;
-      var total = 0;
-      var discounts = 0;
-      var message = "";
-      var n;
-      for (n = 0; n < cartMenu.length; n++) {
-        subtotal = subtotal + amounts[n] * cartMenu[n].Price;
-        console.log("runnnnn");
-      }
-
-      $('#cartSubtotal').html(formatter.format(subtotal));
-      if (subtotal > 100) {
-        total = subtotal - (subtotal * 0.30);
-        discounts = subtotal * 0.30;
-        message = "(Order is over $100: 30% off!)"
-      } else if (subtotal >= 80) {
-        total = subtotal - (subtotal * 0.20)
-        discounts = subtotal * 0.20;
-        message = "(Order is over $80: 20% off!)"
-      } else if (subtotal < 90) {
-        total = subtotal - (subtotal * 0.05)
-        discounts = subtotal * 0.05;
-        message = "(Order is under $80: 5% off!)"
-      }
-      $('#cartDiscount').html("" + formatter.format(discounts) + " " + message);
-      $('#cartTax').html(formatter.format(total * 0.13));
-      $('#cartTotal').html(formatter.format(total));
-      $('#cartTotalTax').html(formatter.format(total * 1.13));
-
-      if (cartMenu.length == 0) {
-        $('#totals').hide();
-        $('#no-items').show();
-      }
-
-
-
-      pushToScreen();
-
 
 
 
     }
-  });
+    var subtotal = 0;
+    var total = 0;
+    var discounts = 0;
+    var message = "";
+    var n;
+    for (n = 0; n < cartMenu.length; n++) {
+      subtotal = subtotal + amounts[n] * cartMenu[n].Price;
+      console.log("runnnnn");
+    }
+
+    $('#cartSubtotal').html(formatter.format(subtotal));
+    if (subtotal > 100) {
+      total = subtotal - (subtotal * 0.30);
+      discounts = subtotal * 0.30;
+      message = "(Order is over $100: 30% off!)"
+    } else if (subtotal >= 80) {
+      total = subtotal - (subtotal * 0.20)
+      discounts = subtotal * 0.20;
+      message = "(Order is over $80: 20% off!)"
+    } else if (subtotal < 90) {
+      total = subtotal - (subtotal * 0.05)
+      discounts = subtotal * 0.05;
+      message = "(Order is under $80: 5% off!)"
+    }
+    $('#cartDiscount').html("" + formatter.format(discounts) + " " + message);
+    $('#cartTax').html(formatter.format(total * 0.13));
+    $('#cartTotal').html(formatter.format(total));
+    $('#cartTotalTax').html(formatter.format(total * 1.13));
+
+    if (cartMenu.length == 0) {
+      $('#totals').hide();
+      $('#no-items').show();
+    }
+
+
+
+    pushToScreen();
+  }
 
   function pushToScreen() {
+
     var i;
     var item = [];
     for (i = 0; i < cartMenu.length; i++) {
@@ -204,15 +213,15 @@ $(document).ready(function() {
       item.push('<div class = "itemAvail">Availablility: ' + cartMenu[i].Available + '</div>');
       item.push('<div class = "itemCategory">Category: ' + cartMenu[i].Category + '</div>');
       item.push('</div>');
-      item.push('<div class="itemButton">')
-      item.push('<button type="button" class="orderButton" id="' + cartMenu[i].Id + '" name="button">Add To Cart</button>')
+      item.push('<div class="itemButtons">')
+      item.push('<button type="button" class="remove-more" name="' + cartMenu[i].Id + '">Remove</button> <button type="button" class="add-more" name="' + cartMenu[i].Id + '">Add</button>')
       item.push('</div>')
       item.push('</div>');
 
     }
 
     $('#menu').html("");
-    $("#menu").append(item.join(''));
+    $("#menu").html(item.join(''));
 
   }
 
@@ -221,7 +230,56 @@ $(document).ready(function() {
 
   // TODO: Add functionality to remove item(s) from cart, as well as add more from the cart page.
 
+  $(document).on('click', '.add-more', function() {
+    var id = this.name;
+    console.log(id);
+    var cartItem = {
+      id: this.id,
+      amount: 1
+    };
+    var foundItem = false;
+    var j;
+    for (j = 0; j < userCart.length; j++) {
+      if (userCart[j].id == id) {
+        userCart[j].amount = userCart[j].amount + 1
+        cartItem = cartItem[j];
+        foundItem = true;
+      }
+    }
+    if (foundItem != true) {
+      userCart.push(cartItem);
+    }
+    totalCartItems++;
+    $("#cartTab").html("(" + totalCartItems + ")");
+    localStorage.setItem("user-cart", JSON.stringify(userCart));
+    reloadScreen();
+  });
 
+
+  $(document).on('click', '.remove-more', function() {
+    var id = this.name;
+    console.log(id);
+    var cartItem = {
+      id: this.id,
+      amount: 1
+    };
+    var foundItem = false;
+    var j;
+    for (j = 0; j < userCart.length; j++) {
+      if (userCart[j].id == id) {
+        userCart[j].amount = userCart[j].amount - 1
+        cartItem = cartItem[j];
+        foundItem = true;
+      }
+    }
+    if (foundItem != true) {
+      userCart.push(cartItem);
+    }
+    totalCartItems++;
+    $("#cartTab").html("(" + totalCartItems + ")");
+    localStorage.setItem("user-cart", JSON.stringify(userCart));
+    reloadScreen();
+  });
 
 
 
