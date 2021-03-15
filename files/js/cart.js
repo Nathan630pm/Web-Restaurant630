@@ -219,6 +219,8 @@ $(document).ready(function() {
 
 
 
+  // TODO: Add functionality to remove item(s) from cart, as well as add more from the cart page.
+
 
 
 
