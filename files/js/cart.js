@@ -268,7 +268,15 @@ $(document).ready(function() {
     for (j = 0; j < userCart.length; j++) {
       if (userCart[j].id == id) {
         userCart[j].amount = userCart[j].amount - 1
-        cartItem = cartItem[j];
+        if (userCart[j].amount == 0) {
+          var index = userCart.map(x => {
+            return x.Id;
+          }).indexOf(userCart[j].id);
+
+          userCart.splice(index, 1);
+        } else {
+          cartItem = cartItem[j];
+        }
         foundItem = true;
       }
     }
