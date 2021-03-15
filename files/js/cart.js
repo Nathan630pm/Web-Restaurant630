@@ -270,15 +270,18 @@ $(document).ready(function() {
         userCart[j].amount = userCart[j].amount - 1
         if (userCart[j].amount == 0) {
           var index = userCart.map(x => {
-            return x.Id;
+            return x.id;
           }).indexOf(userCart[j].id);
 
           userCart.splice(index, 1);
+          console.log("removing with id of: " + index);
         } else {
           cartItem = cartItem[j];
         }
+
         foundItem = true;
       }
+
     }
     if (foundItem != true) {
       userCart.push(cartItem);
