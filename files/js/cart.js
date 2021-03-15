@@ -283,7 +283,7 @@ $(document).ready(function() {
     if (foundItem != true) {
       userCart.push(cartItem);
     }
-    totalCartItems++;
+    totalCartItems--;
     $("#cartTab").html("(" + totalCartItems + ")");
     localStorage.setItem("user-cart", JSON.stringify(userCart));
     reloadScreen();
