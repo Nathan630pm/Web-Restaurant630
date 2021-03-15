@@ -1,0 +1,99 @@
+.paymentInfo {
+  width: 80%;
+  margin:auto;
+  text-align: left;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+/* CONTACT FORM CSS */
+
+#contact {
+  margin: auto;
+  text-align: center;
+  padding-top: 50px;
+  color: #black;
+  width: 90%;
+}
+
+#contact a {
+  color: #afafaf;
+  transition: 0.3s;
+  animation-timing-function: ease-in-out;
+}
+
+#contact a {
+  font-weight: bold;
+}
+
+
+.formInput {
+  width: 80%;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px;
+  color: rgb(209, 209, 209);
+  background-color: rgb(46, 46, 46);
+  border-color: rgb(0, 0, 0, 0);
+  box-shadow: 0 15px 15px 0 #333;
+}
+
+.formInputMessage {
+  width: 80%;
+  height: 100px;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px;
+  color: rgb(209, 209, 209);
+  background-color: rgb(46, 46, 46);
+  border-color: rgb(0, 0, 0, 0);
+  resize: none;
+  box-shadow: 0 15px 15px 0 #333;
+}
+
+
+
+.formButton {
+  width: 25%;
+  padding: 10px;
+  background-color: rgb(0, 0, 0);
+  border-radius: 15px;
+  border-color: rgb(0, 0, 0, 0);
+  box-shadow: 0 15px 15px 0 #333;
+  color: white;
+  transition-duration: 0.3s;
+}
+
+.formButton:hover {
+  transform: scale(1.2, 1.2);
+  transition-duration: 0.3s;
+}
+
+
+#formSuccess{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: none;
+}
+
+#formSuccess {
+  background-color: green;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 15px;
+  font-weight: bold;
+  color: white;
+}
+
+.err {
+  color: red;
+}
+
+
+@media screen and (max-width: 935px) {
+  .formButton {
+      width: 80%;
+    }
+}

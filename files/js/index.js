@@ -89,6 +89,20 @@ $(document).ready(function() {
 // Main Site Functions
 
 $(document).ready(function() {
+
+  var userObj;
+
+  if ('user-obj' in localStorage) {
+    var incomingData = localStorage.getItem("user-obj");
+
+    userObj = JSON.parse(incomingData);
+    if (userObj != null && userObj.loggedIn == true) {
+      $(".loggedin").show();
+      $(".loggedout").hide();
+    }
+  }
+
+
   var menu;
   var userCart = [];
 

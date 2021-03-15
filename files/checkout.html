@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/ico" href="https://Nathan630pm.com/logo.ico" /> <!-- favicon -->
   <meta charset="utf-8">
-  <title>Your Cart | Nathan630pm</title>
+  <title>Checkout | Nathan630pm</title>
   <meta name="description" content="Nathan630pm's Final Project"> <!-- Description -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- FontAwesome -->
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <!-- FONT -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- JQuery -->
   <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/cart.css">
-  <script type="text/javascript" src="js/cart.js"></script>
+  <link rel="stylesheet" href="css/checkout.css">
+  <script type="text/javascript" src="js/checkout.js"></script>
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
@@ -31,7 +31,6 @@
         <a class="loggedin" id="profileButton" style="display: none;" href="profile.html" onclick="toggleMenu()">Profile</a>
         <a class="loggedout" id="loginButton" style="display: block;" href="login.html" onclick="toggleMenu()">Login</a>
         <a href="index.html" onclick="toggleMenu()">Menu</a>
-
         <a id="scrollHelper" href="javascript:void(0);" onclick="toggleMenu()"></a>
       </div>
       <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
@@ -42,41 +41,71 @@
 
   <div class="opener">
     <div class="headerText">
-      <div class="headerTitle">Your Cart</div>
-      <div class="headerDesc">Manage items you've added to your cart.</div>
+      <div class="headerTitle">Checkout</div>
+      <div class="headerDesc">Fill in the information below to purchase the items in your cart!.</div>
     </div>
   </div>
 
   <div class="pageContent">
-    <h1>Your Cart</h1>
-    <div id="sortingArea" class="sorting">
-      <h3>Sort by:</h3>
-      <button type="button" id="low-high" name="button">Price Low-High</button>
-      <button type="button" id="high-low" name="button">Price High-Low</button>
-      <button type="button" id="ava-high-low" name="button">Availablility High-Low</button>
-      <button type="button" id="ava-low-high" name="button">Availablility Low-High</button>
-      <button type="button" id="A-Z" name="button">A-Z</button>
-      <button type="button" id="Z-A" name="button">Z-A</button>
-    </div>
-    <div id="menu">
-
+    <div class="paymentInfo">
+      <div class="desc">Items in Order: <span id="items"></span></div>
+      <div class="desc">Subtotal: <span id="subTotal"></span></div>
+      <div class="desc">Tax: <span id="tax"></span></div>
+      <div class="desc">Total with 13% tax: <span id="total"></span></div>
     </div>
 
-    <div id="totals">
-      <h3>Subtotal: <span id="cartSubtotal"></span></h3>
-      <h3>Discount: <span id="cartDiscount"></span></h3>
-      <h3>Total: <span id="cartTotal"></span></h3>
-      <h3>Total Tax: <span id="cartTax"></span></h3>
-      <h3>Total with 13% Tax: <span id="cartTotalTax"></span></h3>
-      <div class="checkoutArea">
-        <button type="button" id="checkout" name="button">Checkout</button>
-      </div>
-    </div>
+    <div id="contact">
+      <form class="contactForm">
+        <p id='formSuccess'><span>Success!</span>
+        </p>
+        <p>Please Enter Payment Information Below:</p>
+        <div class="form">
+          <p class="name">
+            <label for="formName">Full Name <span class="err" id="formName_err"></span></label><br>
+            <input class="formInput" type="text" name="name" id="formName" placeholder="John Doe" value="">
+          </p>
 
-    <div style="display: none;" id="no-items">
-      <h3>Your cart is empty! Head over to <a href="index.html">our menu</a> to add things to your cart!</h3>
-    </div>
+          <p class="email">
+            <label for="formEmail">Your Email <span class="err" id="email_err"></span></label><br>
+            <input class="formInput " type="text" name="email" id="formEmail" placeholder="example@domain.com" value="">
+          </p>
 
+
+          <p class="phone">
+            <label for="formPhone">Phone Number <span class="err" id="phone_err"></span></label><br>
+            <input class="formInput " type="text" name="subject" id="formPhone" placeholder="(555) 542-1243" value="">
+          </p>
+
+          <p class="card_number">
+            <label for="formCard">Card Number <span class="err" id="card_err"></span></label><br>
+            <input class="formInput " type="number" name="subject" id="formCard" placeholder="1326 7246 1235 1233" value="">
+          </p>
+
+          <p class="expMo">
+            <label for="formExpMo">Expiry Month <span class="err" id="expMo_err"></span></label><br>
+            <input class="formInput " type="number" name="subject" id="formExpMo" placeholder="12" value="">
+          </p>
+
+
+          <p class="expYe">
+            <label for="formExpYe">Expiry Year <span class="err" id="expYe_err"></span></label><br>
+            <input class="formInput " type="number" name="subject" id="formExpYe" placeholder="24" value="">
+          </p>
+
+          <p class="cvv">
+            <label for="formCvv">CVV <span class="err" id="cvv_err"></span></label><br>
+            <input class="formInput " type="number" name="subject" id="formCvv" placeholder="123" value="">
+          </p>
+
+
+          <p class="submit">
+
+          </p>
+        </div>
+
+      </form>
+      <input id="submit" class="formButton" type="submit" value="Purchase Items">
+    </div>
   </div>
 
   <div class="footer" id="footer">

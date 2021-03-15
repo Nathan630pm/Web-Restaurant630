@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/ico" href="https://Nathan630pm.com/logo.ico" /> <!-- favicon -->
+  <meta charset="utf-8">
+  <title>Login | Nathan630pm</title>
+  <meta name="description" content="Nathan630pm's Final Project"> <!-- Description -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <!-- FONT -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- JQuery -->
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+  <script type="text/javascript" src="js/firebase.js"></script>
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
+
+
+  <!-- FIREBASE AUTH -->
+  <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+
+
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/login.css">
+  <script type="text/javascript" src="js/login.js" defer="true"></script>
+
+
+</head>
+
+<body>
+
+  <div id="home"></div>
+  <header>
+    <div class="nav" id="navBar">
+      <div id="mobileNavcrollShadow"><a id="navLogo" href="/"><img class="navLogo" alt="Nathan630pm Logo" src="https://Nathan630pm.com/beta/assets/nav/nathan630pm-nav-logo.png"></a></div>
+      <div class="mobileNavScroll" id="mobileNavScroll">
+        <a href="cart.html" onclick="toggleMenu()">Cart <span id="cartTab"></span></a>
+        <a class="loggedin" id="logoutButton" style="display: none;" href="logout.html" onclick="toggleMenu()">Logout</a>
+        <a class="loggedin" id="profileButton" style="display: none;" href="profile.html" onclick="toggleMenu()">Profile</a>
+        <a class="loggedout" id="loginButton" style="display: block;" href="login.html" onclick="toggleMenu()">Login</a>
+        <a href="index.html" onclick="toggleMenu()">Menu</a>
+        <a id="scrollHelper" href="javascript:void(0);" onclick="toggleMenu()"></a>
+      </div>
+      <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </header>
+
+  <div class="opener">
+    <div class="headerText">
+      <div class="headerTitle">Login</div>
+      <div class="headerDesc">Log into your account to gain faster checkout times when we auto-fill some info for you!.</div>
+    </div>
+  </div>
+
+  <div class="pageContent">
+
+
+    <div id="contact">
+      <form class="contactForm">
+        <p id='formSuccess'><span>Success!</span>
+        </p>
+        <p>Register using the form below:</p>
+        <div class="form">
+          <p class="email">
+            <label for="formEmail">Your Email <span class="err" id="email_err"></span></label><br>
+            <input class="formInput " type="text" name="email" id="formEmail" placeholder="example@domain.com" value="">
+          </p>
+
+          <p class="password">
+            <label for="formEmail">Your Password <span class="err" id="pw_err"></span></label><br>
+            <input class="formInput " type="password" name="email" id="formPw" placeholder="password1@" value="">
+          </p>
+
+
+          <p class="submit">
+
+          </p>
+        </div>
+
+      </form>
+      <input id="submit" class="formButton" type="submit" value="Login">
+    </div>
+  </div>
+
+  <div class="footer" id="footer">
+    <div class="footerContent">
+      <img class="footerLogo" alt="Nathan630pm Logo without text" src="https://Nathan630pm.com/logo.ico">
+      <div class="footerEmail"><a href="mailto:info@Nathan630pm.com">info@Nathan630pm.com</a></div>
+      <div class="socialMedia">
+        <div class="footerText">Nathan630pm's Social Media:</div>
+        <a href="https://www.instagram.com/nathan630pm/" target="_blank"><img alt="Instagram Logo" src="https://Nathan630pm.com/assets/footer/insta-logo.png"></a>
+        <a href="https://www.twitter.com/nathan630pm/" target="_blank"><img alt="Twitter Logo" src="https://Nathan630pm.com/assets/footer/twitter-logo.png"></a>
+        <a href="https://discord.Nathan630pm.com" target="_blank"><img alt="Discord Logo" src="https://Nathan630pm.com/assets/footer/discord-logo.png"></a>
+        <a href="https://www.tiktok.com/@nathan630pm" target="_blank"><img alt="TikTok Logo" src="https://Nathan630pm.com/assets/footer/tiktok-logo.png"></a>
+        <a href="https://youtube.Nathan630pm.com" target="_blank"><img alt="YouTube Logo" src="https://Nathan630pm.com/assets/footer/youtube-logo.png"></a>
+        <a href="https://www.linkedin.com/in/nathan-kennedy-a71ab5156/" target="_blank"><img alt="Linkedin Logo" src="https://Nathan630pm.com/assets/footer/linkedin-logo.png"></a>
+      </div>
+      <span class="copyright">Nathan630pm: The Best Time on The Clock, Hands Down. <br><br>© 2021 Nathan Kennedy: Nathan630pm & Nathan630pm.com</span>
+      <span class="adminLink"><a target="_blank" href="https://Nathan630pm.com">Visit Main Site</a></span>
+    </div>
+  </div>
+
+</body>
+
+</html>

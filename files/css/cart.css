@@ -28,3 +28,17 @@
   transform: scale(1.02, 1.02);
   width: 30%;
 }
+
+.checkoutArea {
+  margin: auto;
+  text-align: center;
+}
+
+
+#checkout {
+  width: 50%;
+  text-align: center;
+  padding: 15px;
+  background-color: #333333;
+  color: #afafaf;
+}
