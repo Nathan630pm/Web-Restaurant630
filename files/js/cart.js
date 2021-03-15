@@ -169,7 +169,7 @@ $(document).ready(function() {
     }
 
     $('#cartSubtotal').html(formatter.format(subtotal));
-    if (subtotal > 100) {
+    if (subtotal >= 100) {
       total = subtotal - (subtotal * 0.30);
       discounts = subtotal * 0.30;
       message = "(Order is over $100: 30% off!)"
