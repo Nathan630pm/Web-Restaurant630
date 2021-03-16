@@ -184,7 +184,7 @@ $(document).ready(function() {
     }
 
     $('#cartSubtotal').html(formatter.format(subtotal));
-    endSubTotal = subtotal;
+
     if (subtotal >= 100) {
       total = subtotal - (subtotal * 0.30);
       discounts = subtotal * 0.30;
@@ -198,6 +198,7 @@ $(document).ready(function() {
       discounts = subtotal * 0.05;
       message = "(Order is under $80: 5% off!)"
     }
+    endSubTotal = total;
     $('#cartDiscount').html("" + formatter.format(discounts) + " " + message);
     $('#cartTax').html(formatter.format(total * 0.13));
     $('#cartTotal').html(formatter.format(total));

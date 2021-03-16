@@ -38,3 +38,19 @@
 .err {
   color: red;
 }
+
+button {
+  margin: 5px;
+  padding: 15px;
+  background-color: #333333;
+  color: #afafaf;
+}
+
+.desc {
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+input {
+  padding: 15px;
+}

@@ -101,7 +101,12 @@ $(document).ready(function() {
       $(".loggedin").show();
       $(".loggedout").hide();
 
-      $("#formName").val(userObj.)
+      $("#formSuccess").show()
+      $("#successMessage").html("We've auto-filled some information because you've logged into your account!")
+
+      $("#formName").val(userObj.name);
+      $("#formEmail").val(userObj.email);
+      $("#formPhone").val(userObj.number);
     }
   }
 
