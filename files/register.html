@@ -17,6 +17,14 @@
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
   <script type="text/javascript" src="js/firebase.js"></script>
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
+
+
+  <!-- FIREBASE AUTH -->
+  <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
 </head>
 
 <body>
@@ -50,6 +58,10 @@
 
 
     <div id="contact">
+
+      <p id='formSuccess'><span id="successMessage">Success!</span></p>
+      <p id='formError'><span id="errorMessage">Error!</span></p>
+
       <form class="contactForm">
         <p id='formSuccess'><span>Success!</span>
         </p>
@@ -63,23 +75,23 @@
 
           <p class="email">
             <label for="formEmail">Your Email <span class="err" id="email_err"></span></label><br>
-            <input class="formInput " type="text" name="email" id="formEmail" placeholder="example@domain.com" value="">
+            <input class="formInput " type="email" name="email" id="formEmail" placeholder="example@domain.com" value="">
           </p>
 
 
           <p class="phone">
             <label for="formPhone">Phone Number <span class="err" id="phone_err"></span></label><br>
-            <input class="formInput " type="text" name="subject" id="formPhone" placeholder="(555) 542-1243" value="">
+            <input class="formInput " type="number" name="subject" id="formPhone" placeholder="(555) 542-1243" value="">
           </p>
 
           <p class="password">
             <label for="formCard">Password <span class="err" id="pw_err"></span></label><br>
-            <input class="formInput " type="password" name="subject" id="pw_err" placeholder="password1@" value="">
+            <input class="formInput " type="password" name="subject" id="pw" placeholder="password1@" value="">
           </p>
 
           <p class="cpassword">
             <label for="formCard">Confirm Password <span class="err" id="cpw_err"></span></label><br>
-            <input class="formInput " type="password" name="subject" id="cpw_err" placeholder="password1@" value="">
+            <input class="formInput " type="password" name="subject" id="cpw" placeholder="password1@" value="">
           </p>
 
 

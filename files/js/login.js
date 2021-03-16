@@ -48,6 +48,7 @@ $(document).ready(function() {
 
   var submit = getUrlParameter('submit');
 
+
   if (submit == "true") {
     $("#formSuccess").show();
   }
@@ -137,7 +138,8 @@ $(document).ready(function() {
 
   $('#submit').on("click", function() {
 
-
+    $("#formSuccess").hide();
+    $("#formError").hide();
 
 
     console.log("logging in");
@@ -159,7 +161,9 @@ $(document).ready(function() {
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
-        alert("Error " + errorCode + ":\n" + errorMessage);
+        $("#formError").show();
+        $("#errorMessage").html("Error " + errorCode + ":\n" + errorMessage);
+        // alert("Error " + errorCode + ":\n" + errorMessage);
       });
 
 
@@ -175,6 +179,8 @@ $(document).ready(function() {
       .get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(doc => {
+          $("#formSuccess").show();
+          $("#successMessage").html("Successfully logged in. Loading profile, please wait...")
           console.log(doc.data());
 
           userObj.docId = doc.id;
@@ -183,12 +189,14 @@ $(document).ready(function() {
           console.log(userObj);
 
           localStorage.setItem("user-obj", JSON.stringify(userObj));
-          window.location.href = "index.html"
+          window.location.href = "profile.html"
 
         });
       })
       .catch(err => {
-        console.log('Error getting documents', err);
+        $("#formError").show();
+        $("#errorMessage").html('Error getting documents: ', err);
+        console.log('Error getting documents: ', err);
       });
   }
 
