@@ -93,6 +93,10 @@ $(document).ready(function() {
 // Main Site Functions
 
 $(document).ready(function() {
+
+  var db = firebase.firestore();
+
+  var editing = false;
   var userObj;
 
   if ('user-obj' in localStorage) {
@@ -102,8 +106,68 @@ $(document).ready(function() {
     if (userObj != null && userObj.loggedIn == true) {
       $(".loggedin").show();
       $(".loggedout").hide();
-      console.log("what");
+      $("#profileName").html(userObj.name);
+      $("#profileNumber").html(userObj.number);
+      $("#profileEmail").html(userObj.email);
+
+      $("#editName").val(userObj.name);
+      $("#editNumber").val(userObj.number);
+      $("#editEmail").val(userObj.email);
+
+
+    } else {
+      alert("You must be logged in to access your profile.")
+      window.location.replace("login.html");
     }
+  }
+
+  $("#editProfile").on("click", function() {
+    if (editing == false) {
+      editing = true;
+      $(".editProfile").show();
+      $(".info").hide();
+      $("#editProfile").html("Save Profile");
+    } else if (editing == true) {
+      editing = false;
+      $(".editProfile").hide();
+      $(".info").show();
+      $("#editProfile").html("Edit Profile");
+
+      updateProfile();
+    }
+
+  })
+
+  function updateObj() {
+    userObj.name = $("#editName").val();
+    userObj.number = $("#editNumber").val();
+    userObj.email = $("#editEmail").val();
+    localStorage.setItem("user-obj", JSON.stringify(userObj));
+  }
+
+  function updateProfile() {
+
+    console.log("updating profile...");
+    var profileRef = db.collection("Parking").doc(userObj.docId);
+    return profileRef.update({
+        name: $("#editName").val(),
+        contactNumber: $("#editNumber").val(),
+        email: $("#editEmail").val()
+      })
+      .then(() => {
+        alert("Document successfully updated!");
+        $("#profileName").html($("#editName").val());
+        $("#profileNumber").html($("#editNumber").val());
+        $("#profileEmail").html($("#editEmail").val())
+        updateObj();
+
+      })
+      .catch((error) => {
+        // The document probably doesn't exist.
+        alert("Error updating document: ", error);
+      });
+
+
   }
 
 

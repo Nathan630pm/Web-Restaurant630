@@ -124,7 +124,9 @@ $(document).ready(function() {
 
   var userObj = {
     id: "",
+    name: "",
     email: "",
+    number: "",
     docId: "",
     loggedIn: false
   }
@@ -176,6 +178,8 @@ $(document).ready(function() {
           console.log(doc.data());
 
           userObj.docId = doc.id;
+          userObj.name = doc.data().name;
+          userObj.number = doc.data().contactNumber;
           console.log(userObj);
 
           localStorage.setItem("user-obj", JSON.stringify(userObj));

@@ -9,9 +9,10 @@
 }
 
 #contact a {
-  color: #afafaf;
+  color: blue;
   transition: 0.3s;
   animation-timing-function: ease-in-out;
+  font-weight: normal;
 }
 
 #contact a {

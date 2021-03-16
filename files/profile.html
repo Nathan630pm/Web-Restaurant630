@@ -17,6 +17,11 @@
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
   <script type="text/javascript" src="js/firebase.js"></script>
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
+
+
 </head>
 
 <body>
@@ -44,6 +49,18 @@
       <div class="headerTitle">Profile</div>
       <div class="headerDesc">Welcome to your profile.</div>
     </div>
+  </div>
+
+  <div class="pageContent">
+
+    <div class="profileInfo">
+
+      <div class="desc">Name: <span class="info" id="profileName"></span><span style="display: none;" class="editProfile"><input id="editName" type="text" name="editName" value=""></span></div>
+      <div class="desc">Email: <span class="info" id="profileEmail"></span><span style="display: none;" class="editProfile"><input id="editEmail" type="text" name="editEmail" value=""></span></div>
+      <div class="desc">Number: <span class="info" id="profileNumber"></span><span style="display: none;" class="editProfile"><input id="editNumber" type="text" name="editNumber" value=""></span></div>
+      <button type="button" id="editProfile" name="button">Edit Profile</button>
+    </div>
+
   </div>
 
   <div class="footer" id="footer">
