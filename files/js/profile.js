@@ -162,15 +162,16 @@ $(document).ready(function() {
   function updateFirebaseEmail(password) {
     $("#pwCheck").hide();
     firebase.auth()
-      .signInWithEmailAndPassword(userObj.email, password)
+      .signInWithEmailAndPassword(userObj.email.toLowerCase(), password)
       .then(function(userCredential) {
-        userCredential.user.updateEmail($("#editEmail").val())
-        userObj.email = $("#editEmail").val();
+        userCredential.user.updateEmail($("#editEmail").val().toLowerCase())
+        userObj.email = $("#editEmail").val().toLowerCase();
         localStorage.setItem("user-obj", JSON.stringify(userObj));
         $("#profileEmail").html($("#editEmail").val())
         $("#formSuccess").show();
 
         $("#successMessage").html("Successfully updated account email!");
+        updateEmailInDB();
 
       })
       .catch(function(error) {
@@ -181,14 +182,32 @@ $(document).ready(function() {
       });
   }
 
+  function updateEmailInDB() {
+    var profileRef = db.collection("Parking").doc(userObj.docId);
+    return profileRef.update({
+        name: $("#editName").val(),
+        email: $("#editEmail").val().toLowerCase()
+      })
+      .then(() => {
+        $("#formSuccess").show();
+        $("#successMessage").html("Successfully updated email details!");
+        $("#profileEmail").html($("#editEmail").val());
+        updateObj();
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        $("#formError").show();
+        $("#errorMessage").html("Error updating email details. Try again later.");
+      });
+  }
+
   function updateProfile() {
 
     console.log("updating profile...");
     var profileRef = db.collection("Parking").doc(userObj.docId);
     return profileRef.update({
         name: $("#editName").val(),
-        contactNumber: $("#editNumber").val(),
-        email: $("#editEmail").val()
+        contactNumber: $("#editNumber").val()
       })
       .then(() => {
         if ($("#profileEmail").html() != $("#editEmail").val()) {
