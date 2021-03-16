@@ -141,8 +141,38 @@ $(document).ready(function() {
   function updateObj() {
     userObj.name = $("#editName").val();
     userObj.number = $("#editNumber").val();
-    userObj.email = $("#editEmail").val();
+
     localStorage.setItem("user-obj", JSON.stringify(userObj));
+  }
+
+  function getUserPassword() {
+
+    $("#pwCheck").show();
+
+  }
+
+  $("#cpassword").on("click", function() {
+    var pw = $("#cpassInput").val();
+
+    updateFirebaseEmail(pw);
+  })
+
+  function updateFirebaseEmail(password) {
+    $("#pwCheck").hide();
+    firebase.auth()
+      .signInWithEmailAndPassword(userObj.email, password)
+      .then(function(userCredential) {
+        userCredential.user.updateEmail($("#editEmail").val())
+        userObj.email = $("#editEmail").val();
+        localStorage.setItem("user-obj", JSON.stringify(userObj));
+        $("#profileEmail").html($("#editEmail").val())
+        alert("Updated account email.")
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        alert("Error updating email: ", error);
+        $("#editEmail").val($("#profileEmail").html())
+      });
   }
 
   function updateProfile() {
@@ -155,14 +185,17 @@ $(document).ready(function() {
         email: $("#editEmail").val()
       })
       .then(() => {
+        if ($("#profileEmail").html() != $("#editEmail").val()) {
+          getUserPassword();
+        }
         alert("Document successfully updated!");
         $("#profileName").html($("#editName").val());
         $("#profileNumber").html($("#editNumber").val());
-        $("#profileEmail").html($("#editEmail").val())
         updateObj();
 
+
       })
-      .catch((error) => {
+      .catch(function(error) {
         // The document probably doesn't exist.
         alert("Error updating document: ", error);
       });
