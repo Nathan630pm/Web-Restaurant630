@@ -122,6 +122,8 @@ $(document).ready(function() {
   }
 
   $("#editProfile").on("click", function() {
+    $("#formSuccess").hide();
+    $("#formError").hide();
     if (editing == false) {
       editing = true;
       $(".editProfile").show();
@@ -146,7 +148,7 @@ $(document).ready(function() {
   }
 
   function getUserPassword() {
-
+    $("#cpassInput").val("");
     $("#pwCheck").show();
 
   }
@@ -166,11 +168,15 @@ $(document).ready(function() {
         userObj.email = $("#editEmail").val();
         localStorage.setItem("user-obj", JSON.stringify(userObj));
         $("#profileEmail").html($("#editEmail").val())
-        alert("Updated account email.")
+        $("#formSuccess").show();
+
+        $("#successMessage").html("Successfully updated account email!");
+
       })
       .catch(function(error) {
         // The document probably doesn't exist.
-        alert("Error updating email: ", error);
+        $("#formError").show();
+        $("#errorMessage").html("Error updating account email. Try again later.");
         $("#editEmail").val($("#profileEmail").html())
       });
   }
@@ -188,7 +194,8 @@ $(document).ready(function() {
         if ($("#profileEmail").html() != $("#editEmail").val()) {
           getUserPassword();
         }
-        alert("Document successfully updated!");
+        $("#formSuccess").show();
+        $("#successMessage").html("Successfully updated account details!");
         $("#profileName").html($("#editName").val());
         $("#profileNumber").html($("#editNumber").val());
         updateObj();
@@ -197,7 +204,8 @@ $(document).ready(function() {
       })
       .catch(function(error) {
         // The document probably doesn't exist.
-        alert("Error updating document: ", error);
+        $("#formError").show();
+        $("#errorMessage").html("Error updating account details. Try again later.");
       });
 
 

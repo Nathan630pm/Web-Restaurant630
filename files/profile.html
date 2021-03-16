@@ -55,15 +55,16 @@
 
     <div class="profileInfo">
 
-      <p id='formSuccess'><span>Success!</span></p>
+      <p id='formSuccess'><span id="successMessage">Success!</span></p>
+      <p id='formError'><span id="errorMessage">Error!</span></p>
 
       <div class="desc">Name: <span class="info" id="profileName"></span><span style="display: none;" class="editProfile"><input id="editName" type="text" name="editName" value=""></span></div>
       <div class="desc">Email: <span class="info" id="profileEmail"></span><span style="display: none;" class="editProfile"><input id="editEmail" type="text" name="editEmail" value=""></span></div>
       <div class="desc">Number: <span class="info" id="profileNumber"></span><span style="display: none;" class="editProfile"><input id="editNumber" type="text" name="editNumber" value=""></span></div>
       <button type="button" id="editProfile" name="button">Edit Profile</button>
 
-      <div style="display: none;" id="pwCheck">
-        <h2>Account details updated, but we need you to confirm password to change the account email:</h2>
+      <div style="display: none; text-align: center;" id="pwCheck">
+        <h3 style="">Account details updated, but we need you to confirm password to change the account email:</h3>
         <input type="password" id="cpassInput" name="password" value="">
         <button type="button" id="cpassword" name="button">Confirm Password</button>
       </div>

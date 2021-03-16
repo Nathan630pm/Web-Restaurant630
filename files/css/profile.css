@@ -23,6 +23,18 @@
   color: white;
 }
 
+#formError{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: none;
+  background-color: red;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 15px;
+  font-weight: bold;
+  color: white;
+}
+
 .err {
   color: red;
 }
